@@ -11,7 +11,7 @@ const LoginComponent = () => {
   const [user] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [setCookie] = useCookies(["token"]);
+  const [cookie, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
   const Login = async () => {
