@@ -16,11 +16,6 @@ const LoginComponent = () => {
   const [cookie, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
-  // function handleSignOut(event) {
-  //   setUser({});
-  //   $("#signin").show();
-  // }
-
   const Login = async () => {
     const data = { email, password };
     const response = await makeUnauthenticatedPOSTRequest("/auth/login", data);
@@ -46,20 +41,6 @@ const LoginComponent = () => {
     // jquery
     $("#signin").hide();
   }
-
-  // useEffect(() => {
-  //   /* global google */
-
-  //   google.accounts.id.initialize({
-  //     client_id:
-  //       "116204614266-1r5jidbth1elpi1ptmp8sd36bqo20o3c.apps.googleusercontent.com",
-  //     callback: handleCallbackResponse,
-  //   });
-  //   google.accounts.id.renderButton(document.getElementById("signin"), {
-  //     theme: "outline",
-  //     size: "large",
-  //   });
-  // }, []);
 
   return (
     <>
