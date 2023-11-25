@@ -1,19 +1,17 @@
 import React from "react";
 import TextInput from "../components/shared/TextInput";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../src/logo.png";
 import "../index.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { makeUnauthenticatedPOSTRequest } from "../utils/serverHelper";
-import { jwtDecode } from "jwt-decode";
-import $ from "jquery";
 
 const LoginComponent = () => {
-  const [user, setUser] = useState();
+  const [user] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [cookie, setCookie] = useCookies(["token"]);
+  const [setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
   const Login = async () => {
@@ -31,16 +29,6 @@ const LoginComponent = () => {
       alert("failure");
     }
   };
-
-  function handleCallbackResponse(response) {
-    console.log("encoded JWT ID token: " + response.credential);
-    var userObject = jwtDecode(response.credential);
-    console.log(userObject);
-    setUser(userObject);
-
-    // jquery
-    $("#signin").hide();
-  }
 
   return (
     <>

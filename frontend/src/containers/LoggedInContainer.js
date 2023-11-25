@@ -2,17 +2,15 @@ import logo from "../../src/logotr.png";
 import { Icon } from "@iconify/react";
 import TextHover from "../components/shared/TextHover";
 
-import { children, useEffect, useState, useLayoutEffect, useRef } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
 import IconText from "../components/shared/IconText";
 import "../index.css";
-import { Howl, Howler } from "howler";
-import Switch from "../routes/DarkMode";
+import { Howl } from "howler";
 import songContext from "../contexts/songContext";
 import { useContext } from "react";
 import CreatePlaylistModal from "../modals/CreatePlaylistModal";
 import AddToPlaylistModal from "../modals/AddToPlaylistModal";
 import { makeAuthenticatedPOSTRequest } from "../utils/serverHelper";
-import { makeAuthenticatedGETRequest } from "../utils/serverHelper";
 
 const LoggedInContainer = ({ children, curActiveScreen, Mode }) => {
   const [createPlaylistModalOpen, setCreatePlaylistModalOpen] = useState(false);

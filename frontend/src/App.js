@@ -13,7 +13,7 @@ import SinglePlaylistView from "./routes/SinglePlaylistView";
 import { useCookies } from "react-cookie";
 import songContext from "./contexts/songContext";
 import { createContext } from "react";
-import ReactSwitch from "react-switch";
+
 export const ThemeContext = createContext(null);
 
 function App() {
