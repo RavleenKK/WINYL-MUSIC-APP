@@ -35,7 +35,7 @@ const SignupComponent = () => {
       date.setDate(date.getDate() + 30);
       setCookie("token", token, { path: "/", expires: date });
       alert("success");
-      navigate("/home");
+      navigate("/login");
     } else {
       alert("failure");
     }
