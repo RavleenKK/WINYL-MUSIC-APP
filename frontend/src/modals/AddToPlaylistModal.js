@@ -1,15 +1,26 @@
 import { useState, useEffect } from "react";
 import { makeAuthenticatedGETRequest } from "../utils/serverHelper";
 
-const AddToPlaylistModal = ({ closeModal, addSongToPlaylist }) => {
+const AddToPlaylistModal = ({
+  closeModal,
+  addSongToPlaylist,
+  likedSongsPlaylistId,
+}) => {
   const [myPlaylists, setMyPlaylists] = useState([]);
+
   useEffect(() => {
     const getData = async () => {
       const response = await makeAuthenticatedGETRequest("/playlist/get/me");
-      setMyPlaylists(response.data);
+
+      // Filter out the "Liked Songs" playlist from the display
+      const playlistsToDisplay = response.data.filter(
+        (playlist) => playlist.name !== "Liked Songs"
+      );
+
+      setMyPlaylists(playlistsToDisplay);
     };
     getData();
-  }, []);
+  }, [likedSongsPlaylistId]);
 
   return (
     <div
@@ -26,14 +37,13 @@ const AddToPlaylistModal = ({ closeModal, addSongToPlaylist }) => {
           Select Playlist
         </div>
         <div className="space-y-4 flex flex-col justify-center items-center">
-          {myPlaylists.map((item) => {
-            return (
-              <PlaylistListComponent
-                info={item}
-                addSongToPlaylist={addSongToPlaylist}
-              />
-            );
-          })}
+          {myPlaylists.map((item) => (
+            <PlaylistListComponent
+              key={item._id}
+              info={item}
+              addSongToPlaylist={addSongToPlaylist}
+            />
+          ))}
         </div>
       </div>
     </div>

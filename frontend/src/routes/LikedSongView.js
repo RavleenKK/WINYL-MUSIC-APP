@@ -77,7 +77,7 @@ const Library = () => {
 
       // Filter out the "Liked Songs" playlist from the display
       const playlistsToDisplay = response.data.filter(
-        (playlist) => playlist.name !== "Liked Songs"
+        (playlist) => playlist.name == "Liked Songs"
       );
 
       setMyPlaylists(playlistsToDisplay);

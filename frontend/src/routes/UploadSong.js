@@ -62,16 +62,20 @@ const UploadSong = () => {
         <div className="flex items-center justify-center ">
           <div className="w-3/5 flex space-x-3 py-7 ">
             <TextInput
+              type={"text"}
               label="Name"
               labelClassname={"text-black"}
               placeholder={"name"}
+              className={"w-3/5"}
               value={name}
               setValue={setName}
             />
             <TextInput
+              type={"text"}
               label="Thumbnail"
               labelClassname={"text-black"}
               placeholder={"thumbnail"}
+              className={"w-3/5 "}
               value={thumbnail}
               setValue={setThumbnail}
             />

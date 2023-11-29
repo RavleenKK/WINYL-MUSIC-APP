@@ -13,6 +13,20 @@
   /* This ensures the container takes the full height of the viewport */
 }
 
+body {
+  --color-background: #fafafa;
+  --color-foreground: #1f2023;
+}
+.App-header {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    --color-background: #1f2023;
+    --color-foreground: #efefef;
+  }
+}
 .header {
   background-color: #121212;
 }
@@ -41,13 +55,6 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.card:hover {
-  box-shadow: #000;
-}
-
-.classhover:hover .icon {
-  opacity: 1; /* Show on hover */
-}
 hr {
   width: 50%;
   align-items: center;
@@ -81,11 +88,6 @@ p {
 }
 
 .btn:hover {
-  text-decoration: none;
-  background-color: #ff7f50;
-}
-
-.hover {
   text-decoration: none;
   background-color: #ff7f50;
 }
@@ -208,6 +210,7 @@ p {
 .bg-img5:hover {
   filter: grayscale(100%);
 }
+
 /* Position the navbar container inside the image */
 .container {
   position: absolute;
@@ -246,6 +249,43 @@ p {
 
 .checkbox:checked + .checkbox-label .ball {
   transform: translateX(24px);
+}
+
+/* Add this to your CSS or stylesheet file */
+/* Add this to your CSS or stylesheet file */
+/* Add these styles to your CSS file */
+.progress-bar-container {
+  position: relative;
+  width: 100%;
+  height: 20px; /* Adjust height as needed */
+  background-color: #363636; /* Set the background color of the progress bar container */
+  cursor: pointer;
+
+  padding-top: 50px;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #ff7f50;
+}
+
+.time-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #f1410d; /* Set the text color of the time display */
+}
+
+.progress-marker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px; /* Adjust the width of the marker */
+  background-color: #00ff00; /* Color of the marker */
 }
 
 @media (min-width: 768px) {

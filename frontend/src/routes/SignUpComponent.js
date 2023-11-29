@@ -10,34 +10,47 @@ import { makeUnauthenticatedPOSTRequest } from "../utils/serverHelper";
 
 const SignupComponent = () => {
   const [email, setEmail] = useState("");
-  const [confirmEmail, setconfirmEmail] = useState("");
+  const [confirmEmail, setConfirmEmail] = useState("");
   const [username, setUsername] = useState("");
-  const [password, setpassword] = useState("");
-  const [firstName, setfirstName] = useState("");
-  const [lastName, setlastName] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [cookie, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
+  const [isValidEmail, setIsValidEmail] = useState(true);
+
+  const validateEmailFormat = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const signUp = async () => {
     if (email !== confirmEmail) {
-      alert("email does not match");
+      alert("Emails do not match");
       return;
     }
+
+    if (!validateEmailFormat(email)) {
+      setIsValidEmail(false);
+      alert("NOT A VALID E-MAIL");
+    }
+
     const data = { email, password, username, firstName, lastName };
     const response = await makeUnauthenticatedPOSTRequest(
       "/auth/register",
       data
     );
+
     if (response && !response.err) {
       console.log(response);
       const token = response.token;
       const date = new Date();
       date.setDate(date.getDate() + 30);
       setCookie("token", token, { path: "/", expires: date });
-      alert("success");
-      navigate("/home");
+      alert("Success");
+      navigate("/login");
     } else {
-      alert("failure");
+      alert("Failure");
     }
   };
 
@@ -58,16 +71,18 @@ const SignupComponent = () => {
             type={"text"}
             label={"First name"}
             placeholder={"Enter your first name"}
+            className={"w-1/5 mb-5 mt-5"}
             value={firstName}
-            setValue={setfirstName}
+            setValue={setFirstName}
           />
 
           <TextInput
             type={"text"}
             label={"Last name"}
             placeholder={"Enter a profile name"}
+            className={"w-1/5 mb-5 mt-5"}
             value={lastName}
-            setValue={setlastName}
+            setValue={setLastName}
           />
         </div>
 
@@ -75,17 +90,29 @@ const SignupComponent = () => {
           <TextInput
             type={"text"}
             label={"Email"}
-            placeholder={"Enter Your email"}
+            placeholder={"Enter your email"}
+            className={`w-1/5 mb-5 mt-5 ${
+              !isValidEmail ? "border-red-500" : ""
+            }`}
             value={email}
-            setValue={setEmail}
+            setValue={(value) => {
+              setEmail(value);
+              setIsValidEmail(true);
+            }}
           />
 
           <TextInput
             type={"text"}
             label={"Confirm Email"}
-            placeholder={"Enter Your email again"}
+            placeholder={"Enter your email again"}
+            className={`w-1/5 mb-5 mt-5 ${
+              !isValidEmail ? "border-red-500" : ""
+            }`}
             value={confirmEmail}
-            setValue={setconfirmEmail}
+            setValue={(value) => {
+              setConfirmEmail(value);
+              setIsValidEmail(true);
+            }}
           />
         </div>
 
@@ -94,6 +121,7 @@ const SignupComponent = () => {
             type={"text"}
             label={"Username"}
             placeholder={"Enter username"}
+            className={"w-1/5 mb-5 mt-5"}
             value={username}
             setValue={setUsername}
           />
@@ -102,8 +130,9 @@ const SignupComponent = () => {
             type={"password"}
             label={"Password"}
             placeholder={"Create a password"}
+            className={"w-1/5 mb-5 mt-5"}
             value={password}
-            setValue={setpassword}
+            setValue={setPassword}
           />
         </div>
 

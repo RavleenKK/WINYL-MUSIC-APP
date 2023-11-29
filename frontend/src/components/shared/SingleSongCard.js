@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import songContext from "../../contexts/songContext";
 
-const SingleSongCard = ({ info, playSound }) => {
+const SingleSongCard = ({ info, playSound, duration }) => {
   const { setCurrentSong } = useContext(songContext);
 
   return (
@@ -13,9 +13,7 @@ const SingleSongCard = ({ info, playSound }) => {
     >
       <div
         className="w-12 h-12 bg-cover bg-center"
-        style={{
-          backgroundImage: `url("${info.thumbnail}")`,
-        }}
+        style={{ backgroundImage: `url("${info.thumbnail}")` }}
       ></div>
       <div className="flex w-full">
         <div className="text-black flex justify-center  flex-col pl-4 w-5/6">

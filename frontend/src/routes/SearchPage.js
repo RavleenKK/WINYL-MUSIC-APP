@@ -3,7 +3,7 @@ import LoggedInContainer from "../containers/LoggedInContainer";
 
 import { makeAuthenticatedGETRequest } from "../utils/serverHelper";
 import SingleSongCard from "../components/shared/SingleSongCard";
-import image3 from "../../src/image3.jpg";
+
 import { Icon } from "@iconify/react";
 const SearchPage = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -13,7 +13,7 @@ const SearchPage = () => {
   const searchSong = async () => {
     // This function will call the search api
     const response = await makeAuthenticatedGETRequest(
-      "/song/get/songname/" + searchText
+      `/song/get/songname/${searchText}?caseSensitive=false`
     );
     setSongData(response.data);
   };

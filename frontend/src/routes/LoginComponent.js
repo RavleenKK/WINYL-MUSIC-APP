@@ -8,15 +8,27 @@ import { useCookies } from "react-cookie";
 import { makeUnauthenticatedPOSTRequest } from "../utils/serverHelper";
 
 const LoginComponent = () => {
-  const [user] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cookie, setCookie] = useCookies(["token"]);
   const navigate = useNavigate();
+  const [isValidEmail, setIsValidEmail] = useState(true);
+
+  const validateEmailFormat = (email) => {
+    // Regular expression for a simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const Login = async () => {
+    if (!validateEmailFormat(email)) {
+      setIsValidEmail(false);
+      alert("Not a valid E-MAIL");
+    }
+
     const data = { email, password };
     const response = await makeUnauthenticatedPOSTRequest("/auth/login", data);
+
     if (response && !response.err) {
       console.log(response);
       const token = response.token;
@@ -24,7 +36,7 @@ const LoginComponent = () => {
       date.setDate(date.getDate() + 30);
       setCookie("token", token, { path: "/", expires: date });
       alert("success");
-      navigate("/home");
+      navigate("/LoggedInHome");
     } else {
       alert("failure");
     }
@@ -45,17 +57,12 @@ const LoginComponent = () => {
       <div className="flex flex-col items-center  ">
         <div className="flex flex-col items-center py-1 mb-2">
           <div id="signin" className="py-1 mb-5">
-            {/* {Object.keys(user).length !== 0 && (
-            <button className="btn" onClick={(e) => handleSignOut(e)}>
-              Sign Out
-            </button>
-          )} */}
-            {user && (
+            {/* {user && (
               <div>
                 <img src={user.picture} alt={user.name}></img>
                 <h3>{user.name}</h3>
               </div>
-            )}
+            )} */}
           </div>
         </div>
 
@@ -66,12 +73,17 @@ const LoginComponent = () => {
           label={"Email ID or Username"}
           placeholder={"Email ID or Username"}
           value={email}
-          setValue={setEmail}
+          className={`w-1/5 mb-5 mt-5 ${!isValidEmail ? "border-red-500" : ""}`}
+          setValue={(value) => {
+            setEmail(value);
+            setIsValidEmail(true); // Reset the validation when the user starts typing again
+          }}
         />
         <TextInput
           type={"password"}
           label={"Password"}
           placeholder={"Password"}
+          className={"w-1/5 mb-5"}
           value={password}
           setValue={setPassword}
         />
