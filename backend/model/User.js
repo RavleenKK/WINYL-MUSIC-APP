@@ -22,10 +22,7 @@ const User = new mongoose.Schema({
     type: String,
     required: true,
   },
-  username: {
-    type: String,
-    required: true,
-  },
+
   likedSongs: {
     // We will change this to array later
     type: String,

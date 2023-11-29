@@ -3,19 +3,30 @@ const router = express.Router();
 const User = require("../model/User");
 const bcrypt = require("bcrypt");
 const { getToken } = require("../utils/helper");
-const { model } = require("mongoose");
 
+// This POST route will help to register a user
 router.post("/register", async (req, res) => {
-  //{email.password,firsttname,lastname,username}
-  const { firstName, lastName, email, username, password } = req.body;
+  // This code is run when the /register api is called as a POST request
 
-  //step2: does a user with this email exists
+  // My req.body will be of the format {email, password, firstName, lastName, username }
+  const { email, password, firstName, lastName, username } = req.body;
+
+  // Step 2 : Does a user with this email already exist? If yes, we throw an error.
   const user = await User.findOne({ email: email });
   if (user) {
-    return res.status(403).json({ error: "user exists" });
+    // status code by default is 200
+    return res
+      .status(403)
+      .json({ error: "A user with this email already exists" });
   }
+  // This is a valid request
 
-  //step 3: create new user
+  // Step 3: Create a new user in the DB
+  // Step 3.1 : We do not store passwords in plain text.
+  // xyz: we convert the plain text password to a hash.
+  // xyz --> asghajskbvjacnijhabigbr
+  // My hash of xyz depends on 2 parameters.
+  // If I keep those 2 parameters same, xyz ALWAYS gives the same hash.
   const hashedPassword = await bcrypt.hash(password, 10);
   const newUserData = {
     email,
@@ -27,15 +38,13 @@ router.post("/register", async (req, res) => {
   const newUser = await User.create(newUserData);
   console.log(newUserData);
 
-  //step 4: JWT
+  // Step 4: We want to create the token to return to the user
   const token = await getToken(email, newUser);
 
-  //step 5: return
-  //converts to json
+  // Step 5: Return the result to the user
   const userToReturn = { ...newUser.toJSON(), token };
   console.log(userToReturn);
   delete userToReturn.password;
-  delete userToReturn.token;
   return res.status(200).json(userToReturn);
 });
 
