@@ -2,17 +2,17 @@
 a music player MERN app that lets you play music, curate playlists and a lot more
 
 # PACKAGES 
-• HOOK
+• hook
 
-• REACT-ROUTER-DOM
+• react-router-dom
 
 # FUTURE SCOPE
-The website can be modified to add more interactive features to enhance the user experience. Some modification that can be done are • Drag and drop feature
+The website can be modified to add more interactive features to enhance the user experience. Some modification that can be done are 
 
-• An artist 
+• An artist page, with all of the artists music and albums visible
 
-• Compression upto a higher level
+• rewind and forward functionality
 
-• Upload option from google drive or dropbox
+• shuffle playlist
 
-• Edit order of the pdf while merging
+
