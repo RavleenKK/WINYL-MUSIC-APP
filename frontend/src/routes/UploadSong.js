@@ -1,8 +1,6 @@
-import logo from "../../src/logotr.png";
-import { Icon } from "@iconify/react";
-import TextHover from "../components/shared/TextHover";
+
 import { useState } from "react";
-import IconText from "../components/shared/IconText";
+
 import "../index.css";
 import TextInput from "../components/shared/TextInput";
 import CloudinaryUpload from "../components/shared/CloudinaryUpload";

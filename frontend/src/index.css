@@ -136,7 +136,7 @@ p {
 
 .bg-img {
   background: #466368;
-  background: url("image7.jpg");
+  background: url("../public//images/image7.jpg");
   filter: grayscale(100%);
   height: 500px;
   width: 100%;
@@ -148,7 +148,7 @@ p {
 
 .bg-img2 {
   background: #466368;
-  background: url("image3.jpg");
+  background: url("../public//images/image3.jpg");
   filter: grayscale(100%);
   height: 500px;
   width: 100%;
@@ -159,7 +159,7 @@ p {
 }
 .bg-img3 {
   background: #466368;
-  background: url("image2.jpg");
+  background: url("../public//images/image2.jpg");
   filter: grayscale(100%);
   height: 300px;
   width: 100%;
@@ -171,7 +171,7 @@ p {
 
 .bg-img4 {
   background: #466368;
-  background: url("image8.jpg");
+  background: url("../public//images/image8.jpg");
   filter: grayscale(50%);
   height: 300px;
   width: 100%;
@@ -183,7 +183,7 @@ p {
 
 .bg-img5 {
   background: #466368;
-  background: url("image.jpg");
+  background: url("../public//images/image.jpg");
   filter: grayscale(50%);
   height: 300px;
   width: 100%;
